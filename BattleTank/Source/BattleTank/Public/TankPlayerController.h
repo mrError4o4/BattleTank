@@ -16,8 +16,10 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 
 private:
 	virtual void BeginPlay() override;
+
 	virtual	void Tick(float DeltaTime) override;
-	ATank* GetControlledTank() const;
+	
+
 	//Moves the barrel so a shot would hit where the crosshair intersects
 	void AimTowardsCrossHair();
 
@@ -33,4 +35,8 @@ private:
 		float CrossHairYLocation = 0.3333f;
 	UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000.f;  //10KM
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		ATank* GetControlledTank() const;
 };
