@@ -44,5 +44,8 @@ void UTankTrack::DriveTrack()
 
 void UTankTrack::SetThrottle(float Throttle)
 {
+	//Clamp actual throttle value so player can't over-drive;
+	auto ForceApllied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
 	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
 }
+

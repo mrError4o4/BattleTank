@@ -33,16 +33,16 @@ public:
 		void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-		int GetRoundsLeft() const;
+		int32 GetRoundsLeft() const;
 
 	void AimAt(FVector HitLocation);
 	EFiringStatus GetFireState() const;
+	
 
 private:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void MoveBarrelTowards(FVector AimDirection);
@@ -59,12 +59,15 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float ReloadTime = 3; // In seconds
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		int32 RoundsLeft = 13;
 
 	double LastFireTime = 0.0;
-	FVector AimDirection;
-	int RoundsLeft = 3;
-
+	
+	
 protected:	
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-		EFiringStatus FiringStatus = EFiringStatus::Reloading;
+		EFiringStatus FiringStatus = EFiringStatus::Aiming;
+
+	FVector AimDirection;
 };
